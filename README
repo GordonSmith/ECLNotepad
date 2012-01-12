@@ -1,0 +1,35 @@
+#  Building on Linux  ---
+#  Get git + svn support if needed
+sudo apt-get install cmake git git-svn
+
+#  Create development folder
+mkdir ~/hpcc_git
+cd ~/hpcc_git
+
+#  Get Sources
+git clone https://github.com/GordonSmith/ECLNotepad.git
+
+# Get Scintilla Sources
+wget http://prdownloads.sourceforge.net/scintilla/scintilla302.tgz
+tar xf scintilla302.tgz
+rm scintilla302.tgz
+
+# Get SciTE Sources
+wget http://prdownloads.sourceforge.net/scintilla/scite302.tgz
+tar xf scite302.tgz
+rm scite302.tgz
+
+# Create build folder.
+mkdir build
+cd build
+
+# Create ECLNotepad build folder.
+mkdir ECLNotepad
+cd ECLNotepad
+
+# Build.
+cmake -DSCINTILLA_DIR="../../scintilla" -DSCITE_DIR="../../scite" ../../ECLNotepad 
+sudo make
+
+# Copy "property" files to home folder
+cp ~/hpcc_git/ECLNotepad/properties/* ~/
